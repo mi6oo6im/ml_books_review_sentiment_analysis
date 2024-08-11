@@ -1,60 +1,112 @@
-# Sample DataFrame
+Logistic Regression 
+
+train time 14.7s
+accuracy: 0.76
+
+```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+
+# Example data
+X = ["I loved the book!", "It was okay.", "Not my type of book.", "Fantastic read, highly recommend!"]
+y = ["positive", "neutral", "negative", "positive"]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+# Create a pipeline
+model = make_pipeline(TfidfVectorizer(), LogisticRegression())
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print(classification_report(y_test, y_pred))
+```
+
+Naive Bayes
+
+train time: 7.1s
+accuracy: 0.73
+
+```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import make_pipeline
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+
+# Example data
+X = ["I loved the book!", "It was okay.", "Not my type of book.", "Fantastic read, highly recommend!"]
+y = ["positive", "neutral", "negative", "positive"]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+# Create a pipeline
+model = make_pipeline(TfidfVectorizer(), MultinomialNB())
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print(classification_report(y_test, y_pred))
+
+```
+
+Support Vector Machines (SVM)
+
+train time 2m:28s
+accuracy: 0.79
+
+```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import SVC
+from sklearn.pipeline import make_pipeline
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+
+# Example data
+X = ["I loved the book!", "It was okay.", "Not my type of book.", "Fantastic read, highly recommend!"]
+y = ["positive", "neutral", "negative", "positive"]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+# Create a pipeline
+model = make_pipeline(TfidfVectorizer(), SVC(kernel='linear'))
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print(classification_report(y_test, y_pred))
+```
+
+
+Sales analysis
+
+import pandas as pd
+
+# Example DataFrame
 data = {
-    'review': ["I loved the book!", "It was okay.", "Not my type of book.", "Fantastic read, highly recommend!"],
-    'stars_given': [5, 3, 2, 5]  # Assuming stars 1-2 = Negative, 3 = Neutral, 4-5 = Positive
+    'book_title': ['Book A', 'Book A', 'Book A', 'Book B', 'Book B', 'Book C', 'Book C', 'Book C'],
+    'sentiment': ['positive', 'negative', 'positive', 'neutral', 'positive', 'negative', 'positive', 'neutral']
 }
 
 df = pd.DataFrame(data)
 
-# Convert stars to sentiment labels
-df['sentiment'] = df['stars_given'].apply(lambda x: 'positive' if x > 3 else ('neutral' if x == 3 else 'negative'))
+# Step 1: Filter to include only positive reviews
+positive_reviews = df[df['sentiment'] == 'positive']
 
-# Split the data
-X_train, X_test, y_train, y_test = train_test_split(df['review'], df['sentiment'], test_size=0.2, random_state=42)
+# Step 2: Group by title to get the count of positive reviews per book
+positive_count = positive_reviews.groupby('book_title').size().reset_index(name='positive_count')
 
-# Create a pipeline with TF-IDF and Logistic Regression
-pipeline = make_pipeline(
-    TfidfVectorizer(),
-    LogisticRegression()
-)
+# Step 3: Group the entire dataset by title to get the total count of reviews per book
+total_count = df.groupby('book_title').size().reset_index(name='total_count')
 
-# Train the model
-pipeline.fit(X_train, y_train)
+# Step 4: Merge the positive count and total count DataFrames
+merged_df = pd.merge(positive_count, total_count, on='book_title')
 
-# Predict and evaluate
-y_pred = pipeline.predict(X_test)
-print(classification_report(y_test, y_pred))
+# Step 5: Calculate the percentage of positive reviews
+merged_df['positive_percentage'] = (merged_df['positive_count'] / merged_df['total_count']) * 100
 
-
-reviews_df = pd.read_csv('data/cleaned_reviews_for_training_scifi.csv')
-
-# Convert stars to sentiment labels
-reviews_df['sentiment'] = reviews_df['stars_given'].apply(lambda x: 'positive' if x > 3 else ('neutral' if x == 3 else 'negative'))
-
-rows = len(reviews_df)
-
-training_rows = math.floor(rows * 0.8)
-training_rows
-
-testing_rows = math.ceil(rows * 0.2)
-testing_rows
-
-training_df = reviews_df.head(8499)
-
-testing_df = reviews_df.tail(2125)
-
-X_train, y_train = training_df['review'], training_df['sentiment']
-
-X_test, y_test = testing_df['review'], testing_df['sentiment']
-
-# Train the model
-pipeline.fit(X_train, y_train)
-
-
-# Predict and evaluate
-y_pred = pipeline.predict(X_test)
-
-print(y_pred)
-print(y_test)
-
-print(classification_report(y_test, y_pred))
+# Display the result
+print(merged_df)
