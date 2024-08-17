@@ -110,3 +110,8 @@ merged_df['positive_percentage'] = (merged_df['positive_count'] / merged_df['tot
 
 # Display the result
 print(merged_df)
+
+
+References
+Cem Dilmegani, Ezgi Alp, PhD., 2024; 6 Approaches for Sentiment Analysis Machine Learning in 2024. Available at:
+https://research.aimultiple.com/sentiment-analysis-machine-learning/ (Accessed: 17 August 2024)
