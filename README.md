@@ -30,11 +30,10 @@ This project aims to predict the sales success of books based on sentiment analy
 - Sentiment Extraction: Use NLP libraries and tools (e.g., NLTK, TextBlob, VADER, BERT) to extract sentiment scores from the text.
 - Feature Engineering: Transform sentiment scores and other textual features into numerical features suitable for predictive modeling.
 
-5. Predictive Modeling
+5. Sales Analysis and Sales Success Prediction
 
-- Model Selection: Choose appropriate predictive models (e.g., linear regression, decision trees, random forests, gradient boosting, neural networks).
-- Training and Testing: Split the dataset into training and testing sets, train the models, and evaluate their performance using metrics like RMSE, MAE, and R².
-- Model Optimization: Perform hyperparameter tuning and cross-validation to improve model performance.
+- Sales Data Analysis: Description and analysis of the discovered sales data
+- Success Prediction and Analysis: Sentiment Analysis comparison versus Sales data and analysis on sales prediction feasibility
 
 6. Results and Analysis
 
