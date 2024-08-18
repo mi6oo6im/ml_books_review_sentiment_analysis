@@ -113,5 +113,24 @@ print(merged_df)
 
 
 References
+
+Datasets:
+Ansh Tanwar, 2023; Top 100 Bestselling Book Reviews on Amazon. Available at:  https://www.kaggle.com/datasets/anshtanwar/top-200-trending-books-with-reviews/data (Accessed: 10 August 2024)
+
+Trrishan, 2021; Top 100 Science Fiction Books and their Reviews. Available at: https://www.kaggle.com/datasets/notkrishna/top-100-science-fiction-books-and-their-reviews (Accessed: 10 August 2024)
+
+Wikipedia, 2024; List of best-selling books. Available at: https://en.wikipedia.org/wiki/List_of_best-selling_books (Accessed: 10 August 2024)
+
+
+Articles:
 Cem Dilmegani, Ezgi Alp, PhD., 2024; 6 Approaches for Sentiment Analysis Machine Learning in 2024. Available at:
 https://research.aimultiple.com/sentiment-analysis-machine-learning/ (Accessed: 17 August 2024)
+
+US Library of congress, 2023; Frequently Asked Questions: History, Humanities & Social Sciences: Can you tell me how many copies of a book were sold or printed? Available at:
+https://ask.loc.gov/history-humanities-social-sciences/faq/383956 (Accessed: 18 August 2024)
+
+Harvard Library, 2005; Where can I find detailed book sales figures or statistics? Available at: https://ask.library.harvard.edu/faq/81944 (Accessed: 18 August 2024)
+
+SciKit-Learn, Getting Started. Available at: https://scikit-learn.org/stable/getting_started.html (Accessed: 10 August 2024)
+
+Natural Language Toolkit - NLTK. Available at: https://www.nltk.org/ (Accessed: 10 August 2024)
